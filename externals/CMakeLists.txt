@@ -375,6 +375,13 @@ if (ENABLE_OPENGL)
     add_subdirectory(glad)
 endif()
 
+# sirit
+add_subdirectory(sirit EXCLUDE_FROM_ALL)
+
+# spirv-tools
+set(SPIRV_SKIP_EXECUTABLES ON)
+add_subdirectory(spirv-tools EXCLUDE_FROM_ALL)
+
 # Vulkan dependencies
 if (ENABLE_VULKAN)
     # glslang
@@ -394,12 +401,8 @@ if (ENABLE_VULKAN)
         set(ENABLE_CTEST OFF CACHE BOOL "")
         set(ENABLE_HLSL OFF CACHE BOOL "")
         set(BUILD_EXTERNAL OFF CACHE BOOL "")
-        set(ALLOW_EXTERNAL_SPIRV_TOOLS ON)
         add_subdirectory(glslang)
     endif()
-
-    # sirit
-    add_subdirectory(sirit EXCLUDE_FROM_ALL)
 
     # VMA
     if(USE_SYSTEM_VMA)
@@ -425,10 +428,6 @@ if (ENABLE_VULKAN)
     else()
         target_include_directories(vulkan-headers SYSTEM INTERFACE ./vulkan-headers/include)
     endif()
-
-    # SPIRV-Tools
-    add_library(SPIRV-Tools INTERFACE)
-    target_include_directories(SPIRV-Tools SYSTEM INTERFACE ./SPIRV-Tools/include)
 
     # adrenotools
     if (ANDROID AND "arm64" IN_LIST ARCHITECTURE)
