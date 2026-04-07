@@ -112,7 +112,7 @@ bool Exists(const std::string& filename) {
     StripTailDirSlashes(copy);
 
 #ifdef _WIN32
-    struct stat file_info;
+    struct _stat64 file_info;
     // Windows needs a slash to identify a driver root
     if (copy.size() != 0 && copy.back() == ':')
         copy += DIR_SEP_CHR;
@@ -385,20 +385,23 @@ u64 GetSize(const std::string& filename) {
         return 0;
     }
 
-    struct stat buf;
 #ifdef _WIN32
-    if (_wstat64(Common::UTF8ToUTF16W(filename).c_str(), &buf) == 0)
+    struct _stat64 buf;
+    if (_wstat64(Common::UTF8ToUTF16W(filename).c_str(), &buf) == 0) {
+        LOG_TRACE(Common_Filesystem, "{}: {}", filename, buf.st_size);
+        return buf.st_size;
+    }
 #elif ANDROID
     u64 result = AndroidStorage::GetSize(filename);
     LOG_TRACE(Common_Filesystem, "{}: {}", filename, result);
     return result;
 #else
-    if (stat(filename.c_str(), &buf) == 0)
-#endif
-    {
+    struct stat buf;
+    if (stat(filename.c_str(), &buf) == 0) {
         LOG_TRACE(Common_Filesystem, "{}: {}", filename, buf.st_size);
         return buf.st_size;
     }
+#endif
 
     LOG_ERROR(Common_Filesystem, "Stat failed {}: {}", filename, GetLastErrorMsg());
     return 0;
