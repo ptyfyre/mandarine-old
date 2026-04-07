@@ -133,7 +133,11 @@ bool IsDirectory(const std::string& filename) {
     return AndroidStorage::IsDirectory(filename);
 #endif
 
+#ifdef _WIN32
+    struct _stat64 file_info;
+#else
     struct stat file_info;
+#endif
 
     std::string copy(filename);
     StripTailDirSlashes(copy);
