@@ -98,7 +98,10 @@ endif()
 
 # Oaknut
 if ("arm64" IN_LIST ARCHITECTURE)
+    set(BUILD_TESTING_SAVE ${BUILD_TESTING})
+    set(BUILD_TESTING OFF)
     add_subdirectory(oaknut EXCLUDE_FROM_ALL)
+    set(BUILD_TESTING ${BUILD_TESTING_SAVE})
 endif()
 
 # Dynarmic
