@@ -4,6 +4,11 @@
 
 #include <span>
 #include <unordered_map>
+
+#if defined(__GNUC__) || defined(__clang__)
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
+
 #include "common/assert.h"
 #include "common/file_util.h"
 #include "common/logging/log.h"
@@ -956,7 +961,11 @@ std::string FormatDefaultValue(const AVOption* option,
     case AV_OPT_TYPE_VIDEO_RATE: {
         return ToStdString(option->default_val.str);
     }
+#if LIBAVUTIL_VERSION_INT >= AV_VERSION_INT(57, 28, 100)
+    case AV_OPT_TYPE_CHLAYOUT: {
+#else
     case AV_OPT_TYPE_CHANNEL_LAYOUT: {
+#endif
         return fmt::format("{:#x}", option->default_val.i64);
     }
     default:
