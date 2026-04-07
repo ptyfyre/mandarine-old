@@ -30,7 +30,7 @@ void FmtLogMessageImpl(Class log_class, Level log_level, const char* filename,
 template <typename... Args>
 void FmtLogMessage(Class log_class, Level log_level, const char* filename, unsigned int line_num,
                    const char* function, fmt::format_string<Args...> format, const Args&... args) {
-    FmtLogMessageImpl(log_class, log_level, filename, line_num, function, format,
+    FmtLogMessageImpl(log_class, log_level, filename, line_num, function, format.get(),
                       fmt::make_format_args(args...));
 }
 
