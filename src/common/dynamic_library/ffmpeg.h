@@ -114,6 +114,9 @@ typedef const AVCodec* (*avcodec_find_encoder_by_name_func)(const char*);
 typedef void (*avcodec_free_context_func)(AVCodecContext**);
 typedef const AVClass* (*avcodec_get_class_func)();
 typedef const AVCodecHWConfig* (*avcodec_get_hw_config_func)(const AVCodec*, int);
+typedef int (*avcodec_get_supported_config_func)(const AVCodecContext*, const AVCodec*,
+                                                  enum AVCodecConfig, unsigned, const void**,
+                                                  int*);
 typedef int (*avcodec_open2_func)(AVCodecContext*, const AVCodec*, AVDictionary**);
 typedef int (*avcodec_parameters_from_context_func)(AVCodecParameters* par, const AVCodecContext*);
 typedef int (*avcodec_receive_frame_func)(AVCodecContext*, AVFrame*);
@@ -138,6 +141,7 @@ extern avcodec_find_encoder_by_name_func avcodec_find_encoder_by_name;
 extern avcodec_free_context_func avcodec_free_context;
 extern avcodec_get_class_func avcodec_get_class;
 extern avcodec_get_hw_config_func avcodec_get_hw_config;
+extern avcodec_get_supported_config_func avcodec_get_supported_config;
 extern avcodec_open2_func avcodec_open2;
 extern avcodec_parameters_from_context_func avcodec_parameters_from_context;
 extern avcodec_receive_frame_func avcodec_receive_frame;
@@ -207,8 +211,8 @@ extern avio_open_func avio_open;
 
 // swresample
 #if LIBSWRESAMPLE_VERSION_INT >= AV_VERSION_INT(4, 5, 100)
-typedef SwrContext* (*swr_alloc_set_opts2_func)(SwrContext**, AVChannelLayout*, AVSampleFormat, int,
-                                                AVChannelLayout*, AVSampleFormat, int, int, void*);
+typedef int (*swr_alloc_set_opts2_func)(SwrContext**, const AVChannelLayout*, AVSampleFormat, int,
+                                        const AVChannelLayout*, AVSampleFormat, int, int, void*);
 #else
 typedef SwrContext* (*swr_alloc_set_opts_func)(SwrContext*, int64_t, AVSampleFormat, int, int64_t,
                                                AVSampleFormat, int, int, void*);
