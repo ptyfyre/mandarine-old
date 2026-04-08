@@ -78,7 +78,9 @@ android {
                     "-DENABLE_QT=0", // Don't use QT
                     "-DENABLE_SDL2=0", // Don't use SDL
                     "-DANDROID_ARM_NEON=true", // cryptopp requires Neon to work
-                    "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
+                    "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON",
+                    "-DALSOFT_CPUEXT_SSE=OFF" // Disable OpenAL SSE intrinsics on Android becuase clang 18 rejects _mm_load_ps
+
                 )
             }
         }
