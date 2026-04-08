@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 if [ "$TARGET" = "appimage" ]; then
-    export EXTRA_CMAKE_FLAGS=(-DCMAKE_LINKER=/etc/bin/ld.lld)
+    export EXTRA_CMAKE_FLAGS=(-DCMAKE_LINKER=/usr/bin/ld.lld-18)
 else
     # For the linux-fresh verification target, verify compilation without PCH as well.
     export EXTRA_CMAKE_FLAGS=(-DMANDARINE_USE_PRECOMPILED_HEADERS=OFF)
