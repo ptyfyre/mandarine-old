@@ -122,7 +122,8 @@ static u8 PipeIndexToSlotIndex(u8 pipe_index, PipeDirection direction) {
 }
 
 struct DspLle::Impl final {
-    Impl(Core::Timing& timing, bool multithread) : teakra({.dsp_memory = dsp_memory.data()}), core_timing(timing), multithread(multithread) {
+    Impl(Core::Timing& timing, bool multithread)
+        : teakra({.dsp_memory = dsp_memory.data()}), core_timing(timing), multithread(multithread) {
         teakra_slice_event = core_timing.RegisterEvent(
             "DSP slice", [this](u64, int late) { TeakraSliceEvent(static_cast<u64>(late)); });
     }

@@ -115,8 +115,7 @@ typedef void (*avcodec_free_context_func)(AVCodecContext**);
 typedef const AVClass* (*avcodec_get_class_func)();
 typedef const AVCodecHWConfig* (*avcodec_get_hw_config_func)(const AVCodec*, int);
 typedef int (*avcodec_get_supported_config_func)(const AVCodecContext*, const AVCodec*,
-                                                  enum AVCodecConfig, unsigned, const void**,
-                                                  int*);
+                                                 enum AVCodecConfig, unsigned, const void**, int*);
 typedef int (*avcodec_open2_func)(AVCodecContext*, const AVCodec*, AVDictionary**);
 typedef int (*avcodec_parameters_from_context_func)(AVCodecParameters* par, const AVCodecContext*);
 typedef int (*avcodec_receive_frame_func)(AVCodecContext*, AVFrame*);
