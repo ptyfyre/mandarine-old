@@ -14,8 +14,8 @@
 #define VK_USE_PLATFORM_XLIB_KHR
 #endif
 
-#include <memory>
 #include <cstring>
+#include <memory>
 #include <vector>
 #include <boost/container/static_vector.hpp>
 #include <fmt/format.h>
@@ -377,7 +377,8 @@ vk::UniqueDebugUtilsMessengerEXT CreateDebugMessenger(vk::Instance instance) {
                        vk::DebugUtilsMessageTypeFlagBitsEXT::eValidation |
                        vk::DebugUtilsMessageTypeFlagBitsEXT::eDeviceAddressBinding |
                        vk::DebugUtilsMessageTypeFlagBitsEXT::ePerformance,
-        .pfnUserCallback = reinterpret_cast<vk::PFN_DebugUtilsMessengerCallbackEXT>(DebugUtilsCallback),
+        .pfnUserCallback =
+            reinterpret_cast<vk::PFN_DebugUtilsMessengerCallbackEXT>(DebugUtilsCallback),
     };
     return instance.createDebugUtilsMessengerEXTUnique(msg_ci);
 }
