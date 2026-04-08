@@ -1,4 +1,4 @@
-// Copyright 2015 Citra Emulator Project
+// Copyright 2025 Citra Project / Mandarine Project
 // Licensed under GPLv2 or any later version
 // Refer to the license.txt file included.
 
@@ -409,20 +409,20 @@ void JitShader::Compile_EvaluateCondition(Instruction instr) {
         break;
 
     case Instruction::FlowControlType::And:
-        mov(al, COND0);
-        mov(bl, COND1);
+        mov(al, COND0.cvt8());
+        mov(bl, COND1.cvt8());
         xor_(al, (instr.flow_control.refx.Value() ^ 1));
         xor_(bl, (instr.flow_control.refy.Value() ^ 1));
         and_(al, bl);
         break;
 
     case Instruction::FlowControlType::JustX:
-        mov(al, COND0);
+        mov(al, COND0.cvt8());
         xor_(al, (instr.flow_control.refx.Value() ^ 1));
         break;
 
     case Instruction::FlowControlType::JustY:
-        mov(al, COND1);
+        mov(al, COND1.cvt8());
         xor_(al, (instr.flow_control.refy.Value() ^ 1));
         break;
     }
