@@ -3,6 +3,7 @@
 // Refer to the license.txt file included.
 
 #include <glad/glad.h>
+#include <cstring>
 #include "common/assert.h"
 #include "common/settings.h"
 #include "video_core/custom_textures/custom_format.h"

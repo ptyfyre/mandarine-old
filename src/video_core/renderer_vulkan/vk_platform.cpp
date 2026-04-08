@@ -15,6 +15,7 @@
 #endif
 
 #include <memory>
+#include <cstring>
 #include <vector>
 #include <boost/container/static_vector.hpp>
 #include <fmt/format.h>

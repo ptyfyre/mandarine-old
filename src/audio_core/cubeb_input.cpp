@@ -4,6 +4,7 @@
 
 #include <utility>
 #include <vector>
+#include <cstring>
 #include <cubeb/cubeb.h>
 #include "audio_core/cubeb_input.h"
 #include "audio_core/input.h"
