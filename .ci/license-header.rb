@@ -2,14 +2,14 @@
 # frozen_string_literal: true
 
 license_header = <<~EOF
-      // Copyright 2025 Citra Project / Mandarine Project
+      // Copyright 2026 Citra Project / Mandarine Project
       // Licensed under GPLv2 or any later version
       // Refer to the license.txt file included.
       EOF
 
 print 'Getting branch changes...'
 branch_name = `git rev-parse --abbrev-ref HEAD`.chomp
-branch_commits = `git log #{branch_name} --not master --pretty=format:"%h"`.split("\n")
+branch_commits = `git log #{branch_name} --not neo --pretty=format:"%h"`.split("\n")
 branch_commit_range = "#{branch_commits[-1]}^..#{branch_commits[0]}"
 branch_changed_files = `git diff-tree --no-commit-id --name-only #{branch_commit_range} -r`.split("\n")
 puts 'done'
