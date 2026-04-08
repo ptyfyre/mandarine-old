@@ -213,9 +213,14 @@ std::vector<u16> ProcessImage(const QImage& image, int width, int height, bool o
     }
     QImage scaled =
         image.scaled(width, height, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_DEPRECATED
     QImage transformed =
         scaled.copy((scaled.width() - width) / 2, (scaled.height() - height) / 2, width, height)
             .mirrored(flip_horizontal, flip_vertical);
+QT_WARNING_POP
+
     if (output_rgb) {
         QImage converted = transformed.convertToFormat(QImage::Format_RGB16);
         std::memcpy(buffer.data(), converted.bits(), width * height * sizeof(u16));
